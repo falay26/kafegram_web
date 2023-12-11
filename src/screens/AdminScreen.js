@@ -32,7 +32,8 @@ const Panel = ({ language }) => {
 
   const onSubmit = async () => {
     try {
-      let parameters = { email: username, pwd: password };
+      let parameters = { username: username, password: password };
+      console.log(parameters);
       const response = await axiosPrivate.post(
         LOGIN_URL,
         JSON.stringify(parameters),
@@ -44,6 +45,7 @@ const Panel = ({ language }) => {
           withCredentials: true,
         }
       );
+      console.log(response);
       if (response.status === 200) {
         setAuth(response.data.user);
         setUsername();
@@ -51,18 +53,7 @@ const Panel = ({ language }) => {
         navigate(from, { replace: true });
       }
     } catch (err) {
-      //alert(err);
-      // TODO: Errorhandling..
-      if (!err?.response) {
-        //setErrMsg("No Server Response");
-      } else if (err.response?.status === 400) {
-        //setErrMsg("Missing Username or Password");
-      } else if (err.response?.status === 401) {
-        //setErrMsg("Unauthorized");
-      } else {
-        //setErrMsg("Login Failed");
-      }
-      //errRef.current.focus();
+      console.log(err);
     }
   };
 
