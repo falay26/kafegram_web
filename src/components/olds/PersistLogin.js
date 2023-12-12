@@ -4,12 +4,14 @@ import { useState, useEffect } from "react";
 import useRefreshToken from "../../hooks/useRefreshToken";
 import useAuth from "../../hooks/useAuth";
 import useLocalStorage from "../../hooks/useLocalStorage";
+//Components
+import LoadingScreen from "../LoadingScreen";
 
 const PersistLogin = () => {
   const [isLoading, setIsLoading] = useState(true);
   const refresh = useRefreshToken();
   const { auth } = useAuth();
-  const [persist] = useLocalStorage("persist", false);
+  const [persist] = useLocalStorage("persist", true);
 
   useEffect(() => {
     let isMounted = true;
@@ -32,7 +34,7 @@ const PersistLogin = () => {
   }, []);
 
   return (
-    <>{!persist ? <Outlet /> : isLoading ? <p>Loading...</p> : <Outlet />}</>
+    <>{!persist ? <Outlet /> : isLoading ? <LoadingScreen /> : <Outlet />}</>
   );
 };
 

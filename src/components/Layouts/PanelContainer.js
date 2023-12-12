@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import SideBar from "./Sidebar";
 import Navbar from "./Navbar";
 import Unauthorized from "../olds/Unauthorized";
+import PanelLoading from "../PanelLoading";
 //Hooks
 import useWindowSize from "../../hooks/useWindowSize";
 import useAuth from "../../hooks/useAuth";
@@ -15,7 +16,7 @@ const ViewHandler = ({ children }) => {
   return auth.roles.includes(Roles.Admin) ? children : <Unauthorized />;
 };
 
-const PanelContainer = ({ children }) => {
+const PanelContainer = ({ children, loading }) => {
   const [width] = useWindowSize();
 
   const [open, setOpen] = useState(true);
@@ -53,7 +54,7 @@ const PanelContainer = ({ children }) => {
       <div className="panel_content_container large" id="panel">
         <Navbar />
         <div className="panel_inside">
-          <ViewHandler children={children} />
+          {loading ? <PanelLoading /> : <ViewHandler children={children} />}
         </div>
       </div>
     </div>

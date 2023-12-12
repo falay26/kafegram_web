@@ -33,7 +33,6 @@ const Panel = ({ language }) => {
   const onSubmit = async () => {
     try {
       let parameters = { username: username, password: password };
-      console.log(parameters);
       const response = await axiosPrivate.post(
         LOGIN_URL,
         JSON.stringify(parameters),
@@ -45,16 +44,13 @@ const Panel = ({ language }) => {
           withCredentials: true,
         }
       );
-      console.log(response);
       if (response.status === 200) {
         setAuth(response.data.user);
         setUsername();
         setPassword("");
         navigate(from, { replace: true });
       }
-    } catch (err) {
-      console.log(err);
-    }
+    } catch (err) {}
   };
 
   return (

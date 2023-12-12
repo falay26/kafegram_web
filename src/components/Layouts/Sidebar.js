@@ -25,10 +25,16 @@ const Sidebar = ({ open, setOpen }) => {
 
   const adminLinks = [
     {
-      title: "Üyeler",
-      link: "panel",
+      title: "Kafe Oluştur",
+      link: "new_cafe",
     },
-    //Other links will be here ..
+  ];
+
+  const kafeLinks = [
+    {
+      title: "Ana Sayfa",
+      link: "home",
+    },
   ];
 
   return (
@@ -42,6 +48,11 @@ const Sidebar = ({ open, setOpen }) => {
       <div className="sidebar_items_contaier">
         {auth.roles.includes(Roles.Admin)
           ? adminLinks.map((item) => (
+              <SidebarItem item={item} key={item.title} />
+            ))
+          : null}
+        {auth.roles.includes(Roles.Kafe)
+          ? kafeLinks.map((item) => (
               <SidebarItem item={item} key={item.title} />
             ))
           : null}
