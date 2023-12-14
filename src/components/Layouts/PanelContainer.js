@@ -13,7 +13,11 @@ import Roles from "../../constants/Roles";
 const ViewHandler = ({ children }) => {
   const { auth } = useAuth();
 
-  return auth.roles.includes(Roles.Admin) ? children : <Unauthorized />;
+  return auth.roles.includes(Roles.Admin) || auth.roles.includes(Roles.Kafe) ? (
+    children
+  ) : (
+    <Unauthorized />
+  );
 };
 
 const PanelContainer = ({ children, loading }) => {

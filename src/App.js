@@ -4,6 +4,8 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./screens/HomeScreen";
 import Admin from "./screens/AdminScreen";
 import Panel from "./screens/PanelScreen";
+import CreateCafe from "./screens/CreateCafeScreen";
+import CafeHome from "./screens/CafeHomeScreen";
 //Old Components
 import PersistLogin from "./components/olds/PersistLogin";
 import RequireAuth from "./components/olds/RequireAuth";
@@ -20,7 +22,7 @@ function App() {
     },
     {
       path: "unauthorized",
-      element: <Unauthorized/>,
+      element: <Unauthorized />,
     },
     {
       path: "privacy_policy",
@@ -34,13 +36,30 @@ function App() {
       element: <PersistLogin />,
       children: [
         {
-          element: <RequireAuth allowedRoles={[Roles.Admin]} />,
+          element: <RequireAuth allowedRoles={[Roles.Admin, Roles.Kafe]} />,
           children: [
             {
               path: "panel",
               element: <Panel />,
             },
-            //Other paths here..
+            {
+              path: "home",
+              element: <CafeHome />,
+            },
+          ],
+        },
+      ],
+    },
+    {
+      element: <PersistLogin />,
+      children: [
+        {
+          element: <RequireAuth allowedRoles={[Roles.Admin]} />,
+          children: [
+            {
+              path: "new_cafe",
+              element: <CreateCafe />,
+            },
           ],
         },
       ],
